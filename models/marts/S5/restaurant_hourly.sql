@@ -1,3 +1,12 @@
+{{
+    config(
+        materialized='incremental',
+        incremental_strategy='delete+insert',
+        unique_key=['identifier','hour']
+    )
+}}
+
+
 SELECT
     D.IDENTIFIER,
     D.NAME,
@@ -10,6 +19,11 @@ FROM
 LEFT JOIN
     {{ ref('stg_dishes') }}                              AS D
     ON ODF.DISH_ID = D.IDENTIFIER
+{% if is_incremental() %}
+    -- this filter will only be applied on an incremental run
+    where
+        hour >= (select max(hour) from {{ this }})
+{% endif %}
 
 group by
     D.IDENTIFIER,
