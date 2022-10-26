@@ -17,9 +17,6 @@ sources:
         columns:
           - name: identifier
             description: Identifiant unique for each restaurant
-            tests:
-              - unique
-              - not_null
       - name: dishes
         description: dishes data
         columns:
