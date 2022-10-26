@@ -9,6 +9,10 @@ config-version: 2
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_ippon_training_dev'
 
+# Limit restaurant
+vars:
+  nb_restaurants: 3
+
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
@@ -30,5 +34,8 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   dbt_ippon_training:
-    # Config indicated by + and applies to all files under models/
-    +materialized: table
+    # Config indicated by + and applies to all files under models/marts/
+    marts:
+      +materialized: table
+    staging:
+      +materialized: ephemeral

@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: sources  
+    schema: source
+    tables:
+      - name: orders
+        description : orders resto
+        columns:
+          - name: identifier
+            description: Identifiant unique for each order
+            tests:
+              - unique
+              - not_null
+      - name: restaurants
+        description: restaurant description
+        columns:
+          - name: identifier
+            description: Identifiant unique for each restaurant
+            tests:
+              - unique
+              - not_null
+      - name: dishes
+        description: dishes data
+        columns:
+          - name: identifier
+            description: identifiant unique each dishes
+            tests:
+              - unique
+              - not_null
+
